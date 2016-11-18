@@ -416,6 +416,11 @@ def launch_instance(region: str, ip: dict, ami: object, subnet_id: str,
         #
         block_devices.append({'DeviceName': '/dev/xvdf', 'Ebs': data_ebs})
 
+        if options['instance_profile_name']:
+           instance_profile_name={'Name': options['instance_profile_name']}
+        else:
+           instance_profile_name={}
+
         resp = ec2.run_instances(
             ImageId=ami.id,
             MinCount=1,
@@ -426,6 +431,7 @@ def launch_instance(region: str, ip: dict, ami: object, subnet_id: str,
             SubnetId=subnet_id,
             PrivateIpAddress=ip['PrivateIp'],
             BlockDeviceMappings=block_devices,
+            IamInstanceProfile=instance_profile_name,
             DisableApiTermination=not(options['no_termination_protection']))
 
         instance = resp['Instances'][0]
@@ -566,6 +572,7 @@ either correct the error or retry.
 @click.option('--environment', '-e', multiple=True)
 @click.option('--sns-topic', help='SNS topic name to send Auto-Recovery notifications to')
 @click.option('--sns-email', help='Email address to subscribe to Auto-Recovery SNS topic')
+@click.option('--instance-profile-name', help='Instance profile name to be used, optional')
 @click.argument('regions', nargs=-1)
 def cli(regions: list,
         cluster_name: str, cluster_size: int, num_tokens: int,
@@ -573,7 +580,7 @@ def cli(regions: list,
         no_termination_protection: bool, use_dmz: bool, hosted_zone: str,
         scalyr_key: str, appdynamics_application: str,
         artifact_name: str, docker_image: str, environment: list,
-        sns_topic: str, sns_email: str):
+        sns_topic: str, sns_email: str, instance_profile_name: str):
 
     if not cluster_name:
         raise click.UsageError('You must specify the cluster name')
