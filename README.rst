@@ -74,6 +74,7 @@ Available options are::
     --environment, -e	Extend/override environment section of Taupage user data.
     --sns-topic		Amazon SNS topic name to use for notifications about Auto-Recovery.
     --sns-email		Email address to subscribe to Amazon SNS notification topic.  See below for details.
+    --instance-profile-name Instance profile name to be used when launching instance (optional). See below for details.
 
 In order to be able to receive notification emails in case instance
 recovery is triggered, provide either SNS topic name in
@@ -92,6 +93,12 @@ It might be required to update the Security Group(s) to allow SSH
 access (TCP port 22) from Odd_ host.  After that is done, you can use
 `Più`_ to get SSH access and create your application user and the
 first schema:
+
+If you want to associate instance profile to your instances specify
+the name of the instance profile with ``--instance-profile-name``.
+The instance profile must exist. When you create IAM role with console, instance
+profile is created automatically with same name. When creating roles with aws cli,
+you need to create both separately. See more `Using Instance Profiles`_
 
 .. code-block:: bash
 
@@ -261,6 +268,7 @@ data that the node is no longer responsible for.
 .. _Jolokia: https://jolokia.org/
 .. _STUPS Cassandra: https://github.com/zalando/stups-cassandra
 .. _Più: http://docs.stups.io/en/latest/components/piu.html
+.. _Using Instance Profiles http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
 Upgrade your cluster from Cassandra 2.1 -> 3.0.x
 ===================

@@ -572,7 +572,7 @@ either correct the error or retry.
 @click.option('--environment', '-e', multiple=True)
 @click.option('--sns-topic', help='SNS topic name to send Auto-Recovery notifications to')
 @click.option('--sns-email', help='Email address to subscribe to Auto-Recovery SNS topic')
-@click.option('--instance-profile-name', help='Instance profile name to be used, optional')
+@click.option('--instance-profile-name', help='Instance profile name to be used')
 @click.argument('regions', nargs=-1)
 def cli(regions: list,
         cluster_name: str, cluster_size: int, num_tokens: int,
