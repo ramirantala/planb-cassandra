@@ -268,7 +268,7 @@ data that the node is no longer responsible for.
 .. _Jolokia: https://jolokia.org/
 .. _STUPS Cassandra: https://github.com/zalando/stups-cassandra
 .. _Più: http://docs.stups.io/en/latest/components/piu.html
-.. _Using Instance Profiles http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+.. _Using Instance Profiles: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
 Upgrade your cluster from Cassandra 2.1 -> 3.0.x
 ===================
